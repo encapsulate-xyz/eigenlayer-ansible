@@ -14,20 +14,33 @@ default_node_types:
   - validator
   - default
 
-sui:
+tmp_dir: /tmp
+
+go:
+  root: /usr/local/go
+  path: "{{ tmp_dir }}/go"
+  module111: "on"
+
+eigenlayer:
   validator:
-    source_url: https://releases.sui.io
+    source_url: https://github.com/Layr-Labs/eigenda
+    cli:
+      source_url: https://github.com/Layr-Labs/eigenlayer-cli/releases/download
+    srs:
+      source_url: https://srs-mainnet.s3.amazonaws.com/kzg
     ports:
-      server_listen_port: 9191
-      metrics_port: 9186
+      dispersal_port: 32005
+      retrieval_port: 32004
+      metrics_port: 9092
+      node_api_port: 9091
   fullnode:
-    version: 88888888888
-    source_url: https://releases.sui.io
+    source_url: https://github.com/Layr-Labs/eigenda
+    cli:
+      source_url: https://github.com/Layr-Labs/eigenlayer-cli/releases/download
+    srs:
+      source_url: https://srs-mainnet.s3.amazonaws.com/kzg
     ports:
-      server_listen_port: 9191
-      metrics_port: 9186
-  bridge:
-    source_url: https://releases.sui.io
-    ports:
-      server_listen_port: 9191
-      metrics_port: 9186
+      dispersal_port: 32005
+      retrieval_port: 32004
+      metrics_port: 9092
+      node_api_port: 9091
