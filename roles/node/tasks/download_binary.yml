@@ -8,8 +8,9 @@
     mode: "0755"
 
 - name: Download and unarchive the binary
-  vars: 
-    suffix_url: "v{{ vars[project][type].cli.version }}/{{ node_cli_default_binary_name }}-cli_{{ vars[project][type].cli.version }}_{{ ansible_system | lower }}_{{ system_architecture }}.tar.gz"
+  vars:
+    suffix_url: "v{{ vars[project][type].cli.version }}/{{ node_cli_default_binary_name }}-cli_{{ vars[project][type].cli.version }}_{{ ansible_system | lower }}_{{
+      system_architecture }}.tar.gz"
   ansible.builtin.unarchive:
     src: "{{ vars[project][type].cli.source_url }}/{{ suffix_url }}"
     dest: "{{ tmp_dir }}/{{ project }}"

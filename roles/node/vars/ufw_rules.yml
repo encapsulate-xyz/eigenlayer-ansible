@@ -6,7 +6,7 @@ node_ufw_rules:
       rule: allow
       from: any
       comment: dispersal_port
-    
+
     - port: "{{ eigenlayer[type].ports.retrieval_port }}"
       proto: tcp
       rule: allow
@@ -25,7 +25,7 @@ node_ufw_rules:
       rule: allow
       from: any
       comment: dispersal_port
-    
+
     - port: "{{ eigenlayer[type].ports.retrieval_port }}"
       proto: tcp
       rule: allow
