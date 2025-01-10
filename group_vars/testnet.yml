@@ -1,15 +1,7 @@
 ---
 # maintains versions and can overwrite all.yml
 eigenlayer:
-  validator:
-    version: v0.8.5
-    go:
-      version: 1.21.1
-    cli:
-      version: 0.10.10
-  fullnode:
-    version: v0.8.5
-    go:
-      version: 1.21.1
+  eigenda:
+    version: 0.8.6
     cli:
       version: 0.10.10
