@@ -36,9 +36,9 @@ eigenlayer:
       prometheus_port: 10004
       health_port: 10003
   omni:
-    halovisor:
+    consensus:
       source_url: omniops/halovisor
-    geth:
+    execution:
       source_url: ethereum/client-go
     cli:
       source_url: https://github.com/omni-network/omni/releases/download

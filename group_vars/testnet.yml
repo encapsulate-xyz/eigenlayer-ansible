@@ -11,9 +11,9 @@ eigenlayer:
       version: 0.0.12
   omni:
     version: v0.11.0
-    halovisor:
+    consensus:
       version: ea783ab
-    geth:
+    execution:
       version: v1.14.12
       network: omega
     cli:
