@@ -1,0 +1,32 @@
+---
+# maintains directories and paths
+omni_consensus_home_dir: /opt/{{ service_identifier }}
+
+omni_consensus_bin_dir: "{{ omni_consensus_home_dir }}/bin"
+omni_consensus_config_dir: "{{ omni_consensus_home_dir }}/config"
+omni_consensus_data_dir: "{{ omni_consensus_home_dir }}/data"
+omni_consensus_env_dir: "{{ omni_consensus_home_dir }}/environment"
+omni_consensus_key_dir: "{{ omni_consensus_home_dir }}/keyring"
+omni_consensus_jwt_secret_dir: "{{ omni_consensus_home_dir }}/jwtsecret"
+omni_consensus_log_dir: "{{ omni_consensus_home_dir }}/log"
+
+omni_consensus_directories:
+  - "{{ omni_consensus_home_dir }}"
+  - "{{ omni_consensus_bin_dir }}"
+  - "{{ omni_consensus_config_dir }}"
+  - "{{ omni_consensus_env_dir }}"
+  - "{{ omni_consensus_data_dir }}"
+  - "{{ omni_consensus_key_dir }}"
+  - "{{ omni_consensus_jwt_secret_dir }}"
+  - "{{ omni_consensus_log_dir }}"
+
+omni_consensus_config_file_path: "{{ omni_consensus_config_dir }}/{{ omni_consensus_config_file_name }}"
+omni_consensus_app_file_path: "{{ omni_consensus_config_dir }}/{{ omni_consensus_app_file_name }}"
+omni_consensus_log_file_path: "{{ omni_consensus_log_dir }}/{{ service_identifier }}.log"
+
+omni_consensus_priv_validator_key_path: "{{ omni_consensus_config_dir }}/{{ omni_consensus_priv_validator_key_file_name }}"
+omni_consensus_omni_consensus_key_path: "{{ omni_consensus_config_dir }}/{{ omni_consensus_node_key_file_name }}"
+omni_consensus_genesis_file_path: "{{ omni_consensus_config_dir }}/{{ omni_consensus_genesis_file_name }}"
+omni_consensus_priv_validator_state_file_path: "{{ omni_consensus_data_dir }}/{{ omni_consensus_priv_validator_state_file_name }}"
+
+omni_consensus_jwt_secret_path: "{{ omni_consensus_jwt_secret_dir }}/{{ omni_consensus_jwt_secret_file_name }}"

@@ -1,0 +1,37 @@
+---
+- name: Create consensus Docker container and copy binary
+  vars:
+    container_name: consensus_node
+  block:
+    - name: Create temporary consensus Docker container for binary extraction
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ eigenlayer.omni.consensus.source_url }}:{{ eigenlayer.omni.consensus.version }}"
+        state: present
+        recreate: true
+
+    - name: Copy consensus binary
+      ansible.builtin.shell: >
+        docker cp {{ container_name }}:/halovisor/upgrades/1_uluwatu/bin/halo {{ omni_consensus_bin_dir }}/{{ service_identifier }}
+      args:
+        executable: /bin/bash
+      register: copy_result
+      changed_when: copy_result.rc == 0
+      failed_when:
+        - copy_result.rc != 0
+        - "'No such container' in copy_result.stderr"
+
+    - name: Ensure consensus binary has the correct permissions
+      ansible.builtin.file:
+        path: "{{ omni_consensus_bin_dir }}/{{ service_identifier }}"
+        owner: root
+        group: root
+        mode: "0755"
+      notify:
+        - Restart service
+
+  always:
+    - name: Remove consensus container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        state: absent

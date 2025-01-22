@@ -1,0 +1,107 @@
+---
+- name: Include the ufw rules vars file
+  ansible.builtin.include_vars:
+    file: vars/ufw_rules.yml
+
+- name: Apply UFW rules
+  ansible.builtin.include_tasks: tasks/apply_ufw_rules.yml
+  loop: "{{ omni_consensus_ufw_rules }}"
+
+- name: Set seeds
+  ansible.builtin.set_fact:
+    seeds: "{{ lookup('file', 'files/{{ env }}/seeds.txt').splitlines() | join(',') }}"
+
+- name: Set peers
+  ansible.builtin.set_fact:
+    peers: "{{ lookup('file', 'files/{{ env }}/peers.txt').splitlines() | join(',') }}"
+
+- name: Include user creation task
+  ansible.builtin.include_tasks: tasks/create_user_and_directories.yml
+  vars:
+    home: "{{ omni_consensus_home_dir }}"
+    directories: "{{ omni_consensus_directories }}"
+    log_file_path: "{{ omni_consensus_log_file_path }}"
+
+- name: Include extract_consensus_binary task
+  ansible.builtin.include_tasks: extract_consensus_binary.yml
+
+- name: Get genesis and configuration files
+  block:
+    - name: Copy configuration file
+      ansible.builtin.template:
+        src: "{{ env }}/config.toml.j2"
+        dest: "{{ omni_consensus_config_file_path }}"
+        owner: "{{ service_identifier }}"
+        group: "{{ service_identifier }}"
+        mode: "0644"
+      notify:
+        - Restart service
+
+    - name: Copy application file
+      ansible.builtin.template:
+        src: "{{ env }}/halo.toml.j2"
+        dest: "{{ omni_consensus_app_file_path }}"
+        owner: "{{ service_identifier }}"
+        group: "{{ service_identifier }}"
+        mode: "0644"
+      notify:
+        - Restart service
+
+    - name: Copy genesis file
+      ansible.builtin.copy:
+        src: "{{ env }}/genesis.json"
+        dest: "{{ omni_consensus_genesis_file_path }}"
+        owner: "{{ service_identifier }}"
+        group: "{{ service_identifier }}"
+        mode: "0644"
+      notify:
+        - Restart service
+
+- name: Creates validator state file
+  ansible.builtin.copy:
+    src: priv_validator_state.json
+    dest: "{{ node_priv_validator_state_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0600"
+    force: false
+  notify:
+    - Restart service
+
+- name: Fetch secrets from HCP Vault and save to files
+  when:
+    - type == 'validator'
+    - fetch_validator_keys | default(false) | bool
+  block:
+    - name: Fetch priv validator key and save
+      ansible.builtin.include_tasks: tasks/get_and_save_vault_secret.yml
+      vars:
+        vault_secret_source_path: "{{ project }}/{{ org }}/{{ type }}/{{ node_priv_validator_key_file_name }}"
+        secret_destination_path: "{{ node_priv_validator_key_path }}"
+        secret_type: json
+
+    - name: Fetch node key and save
+      ansible.builtin.include_tasks: tasks/get_and_save_vault_secret.yml
+      vars:
+        vault_secret_source_path: "{{ project }}/{{ org }}/{{ type }}/{{ node_node_key_file_name }}"
+        secret_destination_path: "{{ node_node_key_path }}"
+        secret_type: json
+
+- name: Copy jwtsecret
+  ansible.builtin.template:
+    src: jwt_secret.j2
+    dest: "{{ omni_consensus_jwt_secret_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+
+- name: Copy omni consensus systemd service file
+  ansible.builtin.template:
+    src: "{{ env }}/systemd.service.j2"
+    dest: /etc/systemd/system/{{ service_identifier }}.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload service
+    - Restart service

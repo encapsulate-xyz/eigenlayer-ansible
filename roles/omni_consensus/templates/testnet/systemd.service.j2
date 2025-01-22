@@ -1,0 +1,17 @@
+[Unit]
+Description={{ service_identifier }}
+
+[Service]
+User={{ service_identifier }}
+Group={{ service_identifier }}
+WorkingDirectory={{ omni_consensus_home_dir }}
+ExecStart={{ omni_consensus_bin_dir }}/{{ service_identifier }} run --home {{ omni_consensus_home_dir }}
+Restart=always
+RestartSec=4
+LimitNOFILE=65536
+MemoryMax=64G
+StandardOutput=append:{{ omni_consensus_log_file_path }}
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
