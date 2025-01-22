@@ -4,4 +4,17 @@ eigenlayer:
   eigenda:
     version: 0.8.6
     cli:
-      version: 0.10.10
+      version: 0.11.0
+  eoracle:
+    version: latest
+    cli:
+      version: 0.0.12
+  omni:
+    version: v0.11.0
+    halovisor:
+      version: ea783ab
+    geth:
+      version: v1.14.12
+      network: omega
+    cli:
+      version: v0.11.0

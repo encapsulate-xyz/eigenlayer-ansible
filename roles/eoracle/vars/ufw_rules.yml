@@ -1,0 +1,19 @@
+---
+eoracle_ufw_rules:
+    - port: "{{ eigenlayer[type].ports.dispersal_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: dispersal_port
+
+    - port: "{{ eigenlayer[type].ports.retrieval_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: retrieval_port
+
+    - port: "{{ eigenlayer[type].ports.metrics_port }}"
+      proto: tcp
+      rule: allow
+      from: "{{ monitor_server_dns }}"
+      comment: metrics_port

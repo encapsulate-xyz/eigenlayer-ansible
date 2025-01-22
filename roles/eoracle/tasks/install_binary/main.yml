@@ -1,0 +1,6 @@
+---
+- name: Include extract eoracle node binary task
+  ansible.builtin.include_tasks: extract_eoracle_binary.yml
+
+- name: Include download binary task for eoracle-cli
+  ansible.builtin.include_tasks: download_cli_binary.yml
