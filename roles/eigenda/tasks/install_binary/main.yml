@@ -1,0 +1,6 @@
+---
+- name: Include extract eigenDA binary task for eigenlayer node
+  ansible.builtin.include_tasks: extract_eigenda_binary.yml
+
+- name: Include download binary task for eigenlayer-cli
+  ansible.builtin.include_tasks: download_cli_binary.yml

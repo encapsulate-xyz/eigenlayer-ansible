@@ -1,0 +1,16 @@
+---
+- name: Download srs g1.point
+  ansible.builtin.get_url:
+    url: "{{ eigenlayer.eigenda.srs.source_url }}/{{ eigenda_g1_point_file_name }}"
+    dest: "{{ eigenda_g1_point_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: root
+    mode: "0644"
+
+- name: Download srs g2.point.powerOf2
+  ansible.builtin.get_url:
+    url: "{{ eigenlayer.eigenda.srs.source_url }}/{{ eigenda_g2_point_file_name }}"
+    dest: "{{ eigenda_g2_point_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
