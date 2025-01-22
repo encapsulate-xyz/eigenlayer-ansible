@@ -1,0 +1,57 @@
+---
+- name: Ensure tmp directory exists
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}"
+    state: directory
+    mode: "1777"
+
+- name: Create temporary directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ project }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Initiate execution data
+  ansible.builtin.shell: |
+    {{ omni_execution_bin_dir }}/{{ service_identifier }}-cli operator init-nodes --network={{ eigenlayer.omni.execution.network }} --moniker={{ org }}
+  args:
+    chdir: "{{ tmp_dir }}/{{ project }}"
+    executable: /bin/bash
+  changed_when: false
+
+- name: Initiate execution data
+  ansible.builtin.shell: |
+    {{ omni_execution_bin_dir }}/{{ service_identifier }}-cli --state.scheme=path init --datadir /opt/eigenlayer-omni-execution/data /opt/eigenlayer-omni-execution/config/genesis.json
+  args:
+    chdir: "{{ tmp_dir }}/{{ project }}"
+    executable: /bin/bash
+  changed_when: false
+
+- name: Delete chaindata folder directories
+  ansible.builtin.file:
+    path: "{{ omni_execution_chain_data_dir }}"
+    state: absent
+
+- name: Move chaindata folder
+  ansible.builtin.shell: |
+    cp -R  {{ tmp_dir }}/{{ project }}/geth/geth {{ omni_execution_data_dir }}
+  args:
+    chdir: "{{ tmp_dir }}/{{ project }}"
+    executable: /bin/bash
+    creates: "{{ omni_execution_chain_data_dir }}"
+  notify:
+    - Restart service
+
+- name: Set ownership of data directory
+  ansible.builtin.file:
+    path: "{{ omni_execution_data_dir }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    recurse: true
+
+- name: Clean up the temporary directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ project }}"
+    state: absent

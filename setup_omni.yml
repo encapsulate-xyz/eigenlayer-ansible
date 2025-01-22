@@ -1,0 +1,45 @@
+---
+- name: Setup Omni node
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    allowed_node_types: [omni]
+  vars_files:
+    - group_vars/all.yml
+    - group_vars/vault.yml
+    - group_vars/{{ env }}.yml
+
+  tasks:
+    - name: Ensure node type is allowed and run omni_execution and omni_consensus
+      when: type in allowed_node_types
+      block:
+        - name: Setup environment and run omni_consensus role
+          block:
+            - name: Setup environment
+              ansible.builtin.include_tasks: tasks/setup_environment.yml
+              vars:
+                client: consensus
+
+            - name: Include common handlers
+              ansible.builtin.include_role:
+                name: common
+
+            - name: Run omni_consensus role
+              ansible.builtin.include_role:
+                name: omni_consensus
+
+        - name: Setup environment and run omni_execution role
+          block:
+            - name: Setup environment
+              ansible.builtin.include_tasks: tasks/setup_environment.yml
+              vars:
+                client: execution
+
+            - name: Include common handlers
+              ansible.builtin.include_role:
+                name: common
+
+            - name: Run omni_execution role
+              ansible.builtin.include_role:
+                name: omni_execution

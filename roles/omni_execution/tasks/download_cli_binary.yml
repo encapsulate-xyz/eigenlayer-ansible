@@ -1,0 +1,34 @@
+---
+- name: Create a tmp directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ project }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Download and unarchive the binary
+  vars:
+    suffix_url: "{{ eigenlayer.omni.cli.version }}/{{ omni_execution_cli_default_binary_name }}_{{ ansible_system }}_{{ ansible_architecture }}.tar.gz"
+  ansible.builtin.unarchive:
+    src: "{{ eigenlayer.omni.cli.source_url }}/{{ suffix_url }}"
+    dest: "{{ tmp_dir }}/{{ project }}"
+    remote_src: true
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Copy the binary file
+  ansible.builtin.copy:
+    src: "{{ tmp_dir }}/{{ project }}/{{ omni_execution_cli_default_binary_name }}"
+    dest: "{{ omni_execution_bin_dir }}/{{ service_identifier }}-cli"
+    remote_src: true
+    owner: root
+    group: root
+    force: true
+    mode: "0755"
+
+- name: Clean up the temporary files in /tmp
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ project }}"
+    state: absent

@@ -1,0 +1,13 @@
+---
+omni_execution_ufw_rules:
+    - port: "{{ eigenlayer,.omni.execution.ports.p2p_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: p2p_port
+
+    - port: "{{ eigenlayer,.omni.execution.ports.metrics_port }}"
+      proto: tcp
+      rule: allow
+      from: "{{ monitor_server_dns }}"
+      comment: metrics_port
