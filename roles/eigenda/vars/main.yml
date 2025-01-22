@@ -1,0 +1,16 @@
+---
+# maintains file name, binary names, and anything which is not a directory or path
+
+# key
+eigenda_bls_key_file_name: wallet_bls_key.json
+eigenda_ecdsa_key_file_name: wallet_ecdsa_key.json
+
+eigenda_g1_point_file_name: g1.point
+eigenda_g2_point_file_name: g2.point.powerOf2
+
+# binary names
+eigenda_cli_default_binary_name: eigenlayer
+
+# Environment file names
+eigenda_environment_general_file_name: "{{ service_identifier }}.env"
+eigenda_environment_secret_file_name: "{{ service_identifier }}.secret.env"
