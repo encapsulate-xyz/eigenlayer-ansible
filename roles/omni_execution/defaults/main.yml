@@ -1,0 +1,29 @@
+---
+# maintains directories and paths
+omni_execution_home_dir: /opt/{{ service_identifier }}
+
+omni_execution_bin_dir: "{{ omni_execution_home_dir }}/bin"
+omni_execution_data_dir: "{{ omni_execution_home_dir }}/data"
+omni_execution_config_dir: "{{ omni_execution_home_dir }}/config"
+omni_execution_key_dir: "{{ omni_execution_home_dir }}/key"
+omni_execution_log_dir: "{{ omni_execution_home_dir }}/log"
+omni_execution_env_dir: "{{ omni_execution_home_dir }}/environment"
+
+omni_execution_chain_data_dir: "{{ omni_execution_data_dir }}/geth"
+
+omni_execution_directories:
+  - "{{ omni_execution_home_dir }}"
+  - "{{ omni_execution_bin_dir }}"
+  - "{{ omni_execution_data_dir }}"
+  - "{{ omni_execution_config_dir }}"
+  - "{{ omni_execution_key_dir }}"
+  - "{{ omni_execution_log_dir }}"
+  - "{{ omni_execution_env_dir }}"
+
+omni_execution_log_file_path: "{{ omni_execution_log_dir }}/{{ service_identifier }}.log"
+
+omni_execution_jwt_secret_path: "{{ omni_execution_key_dir }}/{{ omni_execution_jwt_secret_file_name }}"
+
+omni_execution_environment_general_file_path: "{{ omni_execution_env_dir }}/{{ omni_execution_environment_general_file_name }}"
+
+omni_execution_config_file_path: "{{ omni_execution_config_dir }}/{{ omni_execution_config_file_name }}"

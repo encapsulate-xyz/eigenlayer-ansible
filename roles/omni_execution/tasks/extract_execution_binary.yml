@@ -1,0 +1,37 @@
+---
+- name: Create execution Docker container and copy binary
+  vars:
+    container_name: execution_node
+  block:
+    - name: Create temporary execution Docker container for binary extraction
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ eigenlayer.omni.execution.source_url }}:{{ eigenlayer.omni.execution.version }}"
+        state: present
+        recreate: true
+
+    - name: Copy execution binary
+      ansible.builtin.shell: >
+        docker cp {{ container_name }}:/usr/local/bin/geth {{ omni_execution_bin_dir }}/{{ service_identifier }}
+      args:
+        executable: /bin/bash
+      register: copy_result
+      changed_when: copy_result.rc == 0
+      failed_when:
+        - copy_result.rc != 0
+        - "'No such container' in copy_result.stderr"
+
+    - name: Ensure execution binary has the correct permissions
+      ansible.builtin.file:
+        path: "{{ omni_execution_bin_dir }}/{{ service_identifier }}"
+        owner: root
+        group: root
+        mode: "0755"
+      notify:
+        - Restart service
+
+  always:
+    - name: Remove execution container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        state: absent
