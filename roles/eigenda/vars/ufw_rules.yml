@@ -1,0 +1,37 @@
+---
+eigenda_ufw_rules:
+    - port: "{{ eigenlayer[type].ports.dispersal_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: dispersal_port
+    
+    - port: "{{ eigenlayer[type].ports.v2_dispersal_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: v2_dispersal_port
+
+    - port: "{{ eigenlayer[type].ports.retrieval_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: retrieval_port
+
+    - port: "{{ eigenlayer[type].ports.v2_retrieval_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: v2_retrieval_port
+
+    - port: "{{ eigenlayer[type].ports.node_api_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: node_api_port
+
+    - port: "{{ eigenlayer[type].ports.metrics_port }}"
+      proto: tcp
+      rule: allow
+      from: "{{ monitor_server_dns }}"
+      comment: metrics_port
