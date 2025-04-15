@@ -5,5 +5,3 @@ eigenlayer:
     version: 0.8.6
     cli:
       version: 0.10.10
-    srs:
-      source_url: https://srs-mainnet.s3.amazonaws.com/kzg

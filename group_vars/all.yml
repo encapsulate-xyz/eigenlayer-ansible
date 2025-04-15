@@ -21,6 +21,8 @@ eigenlayer:
     source_url: ghcr.io/layr-labs/eigenda/opr-node
     cli:
       source_url: https://github.com/Layr-Labs/eigenlayer-cli/releases/download
+    srs:
+      source_url: https://srs-mainnet.s3.amazonaws.com/kzg
     ports:
       dispersal_port: 32005
       v2_dispersal_port: 32006
