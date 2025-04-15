@@ -1,0 +1,19 @@
+[Unit]
+Description={{ service_identifier }}
+
+[Service]
+User={{ service_identifier }}
+Group={{ service_identifier }}
+WorkingDirectory={{ eoracle_home_dir }}
+EnvironmentFile={{ eoracle_environment_general_file_path }}
+EnvironmentFile={{ eoracle_environment_secret_file_path }}
+ExecStart={{ eoracle_bin_dir }}/{{ service_identifier }}
+Restart=always
+RestartSec=4
+LimitNOFILE=65536
+MemoryMax=64G
+StandardOutput=append:{{ eoracle_log_file_path }}
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target

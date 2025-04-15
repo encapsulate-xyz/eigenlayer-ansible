@@ -1,0 +1,13 @@
+---
+eoracle_ufw_rules:
+    - port: "{{ eigenlayer[type].ports.health_port }}"
+      proto: tcp
+      rule: allow
+      from: "{{ monitor_server_dns }}"
+      comment: health_port
+
+    - port: "{{ eigenlayer[type].ports.prometheus_port }}"
+      proto: tcp
+      rule: allow
+      from: "{{ monitor_server_dns }}"
+      comment: prometheus_port
