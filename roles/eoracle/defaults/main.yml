@@ -25,3 +25,4 @@ eoracle_environment_secret_file_path: "{{ eoracle_env_dir }}/{{ eoracle_environm
 
 eoracle_bls_key_path: "{{ eoracle_key_dir }}/{{ eoracle_bls_key_file_name }}"
 eoracle_ecdsa_key_path: "{{ eoracle_key_dir }}/{{ eoracle_ecdsa_key_file_name }}"
+eoracle_alias_key_path: "{{ eoracle_key_dir }}/{{ eoracle_alias_key_file_name }}"

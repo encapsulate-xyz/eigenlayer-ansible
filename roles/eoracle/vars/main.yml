@@ -4,6 +4,7 @@
 # key
 eoracle_bls_key_file_name: wallet_bls_key.json
 eoracle_ecdsa_key_file_name: wallet_ecdsa_key.json
+eoracle_alias_key_file_name: wallet_alias_key.json
 
 # binary names
 eoracle_cli_default_binary_name: Eoracle-operator-cli
