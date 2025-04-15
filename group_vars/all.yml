@@ -37,3 +37,4 @@ eigenlayer:
     ports:
       prometheus_port: 10004
       health_port: 10003
+      data_port: 10005

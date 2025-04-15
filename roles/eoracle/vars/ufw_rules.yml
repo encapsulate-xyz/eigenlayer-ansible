@@ -1,5 +1,11 @@
 ---
 eoracle_ufw_rules:
+    - port: "{{ eigenlayer[type].ports.data_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: data_port
+
     - port: "{{ eigenlayer[type].ports.health_port }}"
       proto: tcp
       rule: allow
