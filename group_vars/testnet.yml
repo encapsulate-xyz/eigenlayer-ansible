@@ -5,3 +5,7 @@ eigenlayer:
     version: 0.9.0-rc.1
     cli:
       version: 0.10.10
+  eoracle:
+    version: v2-latest
+    cli:
+      version: 0.0.12

@@ -6,7 +6,7 @@ all:
   children:
     eigenlayer:
       hosts:
-        validator.eigen.mainnet.encapsulate.xyz:
-          type: validator
-        fullnode.eigen.mainnet.encapsulate.xyz:
-          type: fullnode
+        eigenda.eigen.testnet.encapsulate.xyz:
+          type: eigenda
+        eoracle.eigen.testnet.encapsulate.xyz:
+          type: eoracle

@@ -30,3 +30,11 @@ eigenlayer:
       v2_retrieval_port: 32007
       metrics_port: 9092
       node_api_port: 9091
+  eoracle:
+    source_url: eoracle/data-validator
+    cli:
+      source_url: https://github.com/Eoracle/Eoracle-operator-cli/releases/download
+    ports:
+      prometheus_port: 10004
+      health_port: 10003
+      data_port: 10005
