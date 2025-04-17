@@ -1,0 +1,28 @@
+---
+# maintains directories and paths
+eoracle_home_dir: /opt/{{ service_identifier }}
+
+eoracle_bin_dir: "{{ eoracle_home_dir }}/bin"
+eoracle_config_dir: "{{ eoracle_home_dir }}/config"
+eoracle_data_dir: "{{ eoracle_home_dir }}/data"
+eoracle_env_dir: "{{ eoracle_home_dir }}/environment"
+eoracle_log_dir: "{{ eoracle_home_dir }}/log"
+eoracle_key_dir: "{{ eoracle_home_dir }}/key"
+
+eoracle_directories:
+  - "{{ eoracle_home_dir }}"
+  - "{{ eoracle_bin_dir }}"
+  - "{{ eoracle_config_dir }}"
+  - "{{ eoracle_data_dir }}"
+  - "{{ eoracle_env_dir }}"
+  - "{{ eoracle_key_dir }}"
+  - "{{ eoracle_log_dir }}"
+
+eoracle_log_file_path: "{{ eoracle_log_dir }}/{{ service_identifier }}.log"
+
+eoracle_environment_general_file_path: "{{ eoracle_env_dir }}/{{ eoracle_environment_general_file_name }}"
+eoracle_environment_secret_file_path: "{{ eoracle_env_dir }}/{{ eoracle_environment_secret_file_name }}"
+
+eoracle_bls_key_path: "{{ eoracle_key_dir }}/{{ eoracle_bls_key_file_name }}"
+eoracle_ecdsa_key_path: "{{ eoracle_key_dir }}/{{ eoracle_ecdsa_key_file_name }}"
+eoracle_alias_key_path: "{{ eoracle_key_dir }}/{{ eoracle_alias_key_file_name }}"

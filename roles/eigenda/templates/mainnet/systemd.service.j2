@@ -1,0 +1,17 @@
+[Unit]
+Description={{ service_identifier }}
+
+[Service]
+User={{ service_identifier }}
+Group={{ service_identifier }}
+WorkingDirectory={{ eigenda_home_dir }}
+EnvironmentFile={{ eigenda_environment_general_file_path }}
+EnvironmentFile={{ eigenda_environment_secret_file_path }}
+ExecStart={{ eigenda_bin_dir }}/{{ service_identifier }}
+Restart=always
+RestartSec=4
+LimitNOFILE=65536
+MemoryMax=64G
+
+[Install]
+WantedBy=multi-user.target

@@ -14,20 +14,27 @@ default_node_types:
   - validator
   - default
 
-sui:
-  validator:
-    source_url: https://releases.sui.io
+tmp_dir: /tmp
+
+eigenlayer:
+  eigenda:
+    source_url: ghcr.io/layr-labs/eigenda/opr-node
+    cli:
+      source_url: https://github.com/Layr-Labs/eigenlayer-cli/releases/download
+    srs:
+      source_url: https://srs-mainnet.s3.amazonaws.com/kzg
     ports:
-      server_listen_port: 9191
-      metrics_port: 9186
-  fullnode:
-    version: 88888888888
-    source_url: https://releases.sui.io
+      dispersal_port: 32005
+      v2_dispersal_port: 32006
+      retrieval_port: 32004
+      v2_retrieval_port: 32007
+      metrics_port: 9092
+      node_api_port: 9091
+  eoracle:
+    source_url: eoracle/data-validator
+    cli:
+      source_url: https://github.com/Eoracle/Eoracle-operator-cli/releases/download
     ports:
-      server_listen_port: 9191
-      metrics_port: 9186
-  bridge:
-    source_url: https://releases.sui.io
-    ports:
-      server_listen_port: 9191
-      metrics_port: 9186
+      prometheus_port: 10004
+      health_port: 10003
+      data_port: 10005

@@ -40,3 +40,9 @@
 
 - name: Include configure ufw task
   ansible.builtin.include_tasks: tasks/configure_ufw.yml
+
+- name: Install Dependencies
+  ansible.builtin.apt:
+    name: musl-dev
+    state: present
+    update_cache: true

@@ -1,0 +1,30 @@
+---
+# maintains directories and paths
+eigenda_home_dir: /opt/{{ service_identifier }}
+
+eigenda_bin_dir: "{{ eigenda_home_dir }}/bin"
+eigenda_config_dir: "{{ eigenda_home_dir }}/config"
+eigenda_data_dir: "{{ eigenda_home_dir }}/data"
+eigenda_env_dir: "{{ eigenda_home_dir }}/environment"
+eigenda_log_dir: "{{ eigenda_home_dir }}/log"
+eigenda_key_dir: "{{ eigenda_home_dir }}/key"
+
+eigenda_directories:
+  - "{{ eigenda_home_dir }}"
+  - "{{ eigenda_bin_dir }}"
+  - "{{ eigenda_config_dir }}"
+  - "{{ eigenda_data_dir }}"
+  - "{{ eigenda_env_dir }}"
+  - "{{ eigenda_key_dir }}"
+  - "{{ eigenda_log_dir }}"
+
+eigenda_log_file_path: "{{ eigenda_log_dir }}/{{ service_identifier }}.log"
+
+eigenda_g1_point_file_path: "{{ eigenda_config_dir }}/{{ eigenda_g1_point_file_name }}"
+eigenda_g2_point_file_path: "{{ eigenda_config_dir }}/{{ eigenda_g2_point_file_name }}"
+
+eigenda_environment_general_file_path: "{{ eigenda_env_dir }}/{{ eigenda_environment_general_file_name }}"
+eigenda_environment_secret_file_path: "{{ eigenda_env_dir }}/{{ eigenda_environment_secret_file_name }}"
+
+eigenda_bls_key_path: "{{ eigenda_key_dir }}/{{ eigenda_bls_key_file_name }}"
+eigenda_ecdsa_key_path: "{{ eigenda_key_dir }}/{{ eigenda_ecdsa_key_file_name }}"
