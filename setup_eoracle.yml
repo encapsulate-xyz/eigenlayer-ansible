@@ -1,10 +1,10 @@
 ---
-- name: Set up EigenDA node
+- name: Set up Eoracle node
   hosts: all
   become: true
   gather_facts: true
   vars:
-    allowed_node_types: [eigenda]
+    allowed_node_types: [eoracle]
   vars_files:
     - group_vars/all.yml
     - group_vars/vault.yml
@@ -18,12 +18,12 @@
           ansible.builtin.include_tasks: tasks/setup_environment.yml
 
   tasks:
-    - name: Run eigenda role
+    - name: Run eoracle role
       when: type in allowed_node_types
       block:
         - name: Include common handlers
           ansible.builtin.include_role:
             name: common
-        - name: Include eigenda role
+        - name: Include eoracle role
           ansible.builtin.include_role:
-            name: eigenda
+            name: eoracle

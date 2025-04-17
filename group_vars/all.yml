@@ -28,3 +28,17 @@ eigenlayer:
       retrieval_port: 32004
       metrics_port: 9092
       node_api_port: 9091
+  eoracle:
+    source_url: eoracle/data-validator
+    cli:
+      source_url: https://github.com/Eoracle/Eoracle-operator-cli/releases/download
+    ports:
+      prometheus_port: 10004
+      health_port: 10003
+  omni:
+    consensus:
+      source_url: omniops/halovisor
+    execution:
+      source_url: ethereum/client-go
+    cli:
+      source_url: https://github.com/omni-network/omni/releases/download
