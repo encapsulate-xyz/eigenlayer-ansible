@@ -6,7 +6,7 @@ all:
   children:
     eigenlayer:
       hosts:
-        eigenda.eigen.testnet.encapsulate.xyz:
+        eigenda.eigen.mainnet.encapsulate.xyz:
           type: eigenda
-        eoracle.eigen.testnet.encapsulate.xyz:
+        eoracle.eigen.mainnet.encapsulate.xyz:
           type: eoracle
