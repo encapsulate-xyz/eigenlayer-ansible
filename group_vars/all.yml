@@ -29,7 +29,7 @@ eigenlayer:
       retrieval_port: 32004
       v2_retrieval_port: 32007
       metrics_port: 9092
-      node_api_port: 9091
+      node_api_port: 9093
   eoracle:
     source_url: eoracle/data-validator
     cli:
