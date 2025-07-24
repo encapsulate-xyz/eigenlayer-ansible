@@ -16,6 +16,7 @@
 
 - name: Include download srs task
   ansible.builtin.include_tasks: download_srs.yml
+  when: fetch_srs | default(false) | bool
 
 - name: Include install_binary task
   ansible.builtin.include_tasks: install_binary/main.yml
