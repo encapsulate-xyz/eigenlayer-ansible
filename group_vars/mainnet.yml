@@ -2,7 +2,7 @@
 # maintains versions and can overwrite all.yml
 eigenlayer:
   eigenda:
-    version: 2.2.0
+    version: 2.3.1
     cli:
       version: 0.13.1
   eoracle:
