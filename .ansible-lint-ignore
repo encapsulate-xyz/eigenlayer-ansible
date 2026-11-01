@@ -1,0 +1,8 @@
+# This file contains ignores rule violations for ansible-lint
+roles/eigenda/tasks/install_binary/download_cli_binary.yml yaml[line-length]
+roles/eigenda/tasks/install_binary/extract_eigenda_binary.yml var-naming[no-role-prefix]
+roles/eigenda/tasks/main.yml yaml[trailing-spaces]
+roles/eigenda/vars/ufw_rules.yml yaml[trailing-spaces]
+roles/eoracle/tasks/install_binary/download_cli_binary.yml yaml[line-length]
+roles/eoracle/tasks/install_binary/extract_eoracle_binary.yml var-naming[no-role-prefix]
+roles/eoracle/tasks/main.yml yaml[trailing-spaces]
