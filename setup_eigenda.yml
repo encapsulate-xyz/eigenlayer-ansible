@@ -27,3 +27,16 @@
         - name: Include eigenda role
           ansible.builtin.include_role:
             name: eigenda
+            public: true
+
+  post_tasks:
+    - name: Verify eigenda node
+      when: type in allowed_node_types
+      block:
+        # No version check: the node binary blocks forever after printing --version
+        - name: Include verify service task
+          ansible.builtin.include_tasks: tasks/verify_service.yml
+          vars:
+            log_file_path: "{{ eigenda_log_file_path }}"
+            health_url: "http://localhost:{{ eigenlayer.eigenda.ports.node_api_port }}/eigen/node/health"
+            health_status_codes: [200, 206]
