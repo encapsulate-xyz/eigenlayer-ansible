@@ -27,3 +27,15 @@
         - name: Include eoracle role
           ansible.builtin.include_role:
             name: eoracle
+            public: true
+
+  post_tasks:
+    - name: Verify eoracle node
+      when: type in allowed_node_types
+      block:
+        # No version check: the image is pinned to a moving tag (latest), not a version
+        - name: Include verify service task
+          ansible.builtin.include_tasks: tasks/verify_service.yml
+          vars:
+            log_file_path: "{{ eoracle_log_file_path }}"
+            health_url: "http://localhost:{{ eigenlayer.eoracle.ports.prometheus_port }}/metrics"
