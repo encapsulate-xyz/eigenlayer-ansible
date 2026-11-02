@@ -40,3 +40,5 @@
             log_file_path: "{{ eigenda_log_file_path }}"
             health_url: "http://localhost:{{ eigenlayer.eigenda.ports.node_api_port }}/eigen/node/health"
             health_status_codes: [200, 206]
+            # the API opens after the node loads NODE_SRS_LOAD (8388608) SRS points with one worker
+            health_retries: 60
